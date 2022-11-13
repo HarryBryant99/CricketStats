@@ -62,7 +62,10 @@ public class FileReader {
         int ballsBowled;
         int runsConceded;
         int wickets;
+        double bowlingaverage;
         double economy;
+        int bestFiguresWickets;
+        int bestFiguresRuns;
 
         // Loop runs until there are no more rows left to read, adding each user to the array list.
         while (lineIn.hasNext()) {
@@ -86,10 +89,13 @@ public class FileReader {
             ballsBowled = lineIn.nextInt();
             runsConceded = lineIn.nextInt();
             wickets = lineIn.nextInt();
+            bowlingaverage = lineIn.nextInt();
             economy = lineIn.nextDouble();
+            bestFiguresWickets = lineIn.nextInt();
+            bestFiguresRuns = lineIn.nextInt();
 
             Player newPlayer = new Player(name, matches, innings, notOuts, runs, ballsFaced, fifties, hundreds, topScore,
-                    ballsBowled, runsConceded, wickets);
+                    ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresRuns);
             listRead.add(newPlayer);
 
 

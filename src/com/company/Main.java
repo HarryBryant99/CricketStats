@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,15 +29,25 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("Enter the name of the file you want to work on:");
-        String filename = scanner.next();
-        scanner.nextLine();
-        System.out.println(filename);
-        FileReader fileReader = new FileReader();
-        players = fileReader.readFile("newFile.txt");
+        Boolean fileExists = false;
 
-        endOfSeason();
-        //addMatch();
+        while (!fileExists) {
+
+            System.out.println("Enter the name of the file you want to work on:");
+            String filename = scanner.next();
+            scanner.nextLine();
+            System.out.println(filename);
+
+            fileExists =  fileExists(filename);
+            if (fileExists) {
+                FileReader fileReader = new FileReader();
+                players = fileReader.readFile("walest20.txt");
+                endOfSeason();
+                //addMatch();
+            } else {
+                System.out.println("Please enter a name of a file that exists");
+            }
+        }
     }
 
     private static void addMatch() {
@@ -124,7 +135,7 @@ public class Main {
 
                 if (!existing){
                     Player newPlayer = new Player(name, matches, innings, notOuts, runsScored, balls, fifties, hundreds, topScore,
-                            ballsBowled, runsConceded, wickets);
+                            ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresRuns);
                     players.add(newPlayer);
                 }
 
@@ -185,7 +196,7 @@ public class Main {
 
                 if (!existing){
                     Player newPlayer = new Player(name, matches, innings, notOuts, runsScored, balls, fifties, hundreds, topScore,
-                            ballsBowled, runsConceded, wickets);
+                            ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresRuns);
                     players.add(newPlayer);
                 }
 
@@ -241,7 +252,7 @@ public class Main {
 
                 if (!existing){
                     Player newPlayer = new Player(name, matches, innings, notOuts, runsScored, balls, fifties, hundreds, topScore,
-                            ballsBowled, runsConceded, wickets);
+                            ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresWickets);
                     players.add(newPlayer);
                 }
             }
@@ -323,7 +334,7 @@ public class Main {
 
                 if (!existing){
                     Player newPlayer = new Player(name, matches, innings, notOuts, runsScored, balls, fifties, hundreds, topScore,
-                            ballsBowled, runsConceded, wickets);
+                            ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresRuns);
                     players.add(newPlayer);
                 }
 
@@ -369,7 +380,7 @@ public class Main {
 
                 if (!existing){
                     Player newPlayer = new Player(name, matches, innings, notOuts, runsScored, balls, fifties, hundreds, topScore,
-                            ballsBowled, runsConceded, wickets);
+                            ballsBowled, runsConceded, wickets, bestFiguresWickets, bestFiguresRuns);
                     players.add(newPlayer);
                 }
             }
@@ -379,5 +390,25 @@ public class Main {
         }
 
         playerWriter.writePlayers(players);
+    }
+
+    private static Boolean fileExists(String filename) {
+        Scanner in = null;
+        File inputFile = new File(filename);
+
+        //Try catch block to remove the FileNotFoundException if the user enters a file not recognised by the program.
+        try {
+            in = new Scanner(inputFile);
+            //This sets the scanner to look in the input file rather than null.
+            return true;
+        } catch (FileNotFoundException e) {
+            System.err.println("Cannot open " + filename);
+            System.exit(0);
+            /* If the file the user is trying to open isn't found the exception is caught and dealt with so that the
+             * program doesn't crash. The user gets an error message on screen alerting them that the file hasn't been
+             * opened and therefore the program won't continue.
+             */
+            return false;
+        }
     }
 }

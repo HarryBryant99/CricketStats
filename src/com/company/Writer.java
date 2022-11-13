@@ -48,7 +48,9 @@ public class Writer {
                             playerList.get(i).getBallsBowled() + "," +
                             playerList.get(i).getRunsConceded() + "," +
                             playerList.get(i).getWickets() + "," +
-                            playerList.get(i).getEconomy());
+                            playerList.get(i).getBowlingAverage() + "," +
+                            playerList.get(i).getEconomy() + "," +
+                            playerList.get(i).getBestFigures());
                 } else {
                     fileWriter.write(playerList.get(i).getName() + "," +
                             playerList.get(i).getMatches() + "," +
@@ -65,7 +67,9 @@ public class Writer {
                             playerList.get(i).getBallsBowled() + "," +
                             playerList.get(i).getRunsConceded() + "," +
                             playerList.get(i).getWickets() + "," +
-                            playerList.get(i).getEconomy() + ",\n");
+                            playerList.get(i).getBowlingAverage() + "," +
+                            playerList.get(i).getEconomy() + "," +
+                            playerList.get(i).getBestFigures() + ",\n");
                 }
             }
 
@@ -75,7 +79,7 @@ public class Writer {
             System.err.println("File newFile.txt does not exist.");
             System.exit(-1);
         } catch (IOException e){ // If there was a problem writing, gives feedback to the user.
-            System.err.println("Caught IO error, writing to newFile.txt");
+            System.err.println("Caught IO error, writing to the file");
             System.exit(-1);
         }
     }

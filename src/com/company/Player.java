@@ -18,10 +18,11 @@ public class Player {
     private int wickets;
     private int bestFiguresWickets;
     private int bestFiguresRuns;
+    private double bowlingAverage;
     private double economy;
 
     public Player(String name, int matches, int innings, int notOuts, double runs, int balls, int fifties, int hundreds, int topScore,
-                  int ballsBowled, int runsConceded, int wickets){
+                  int ballsBowled, int runsConceded, int wickets, int bestFiguresWickets, int bestFiguresRuns){
         this.name = name;
         this.matches = matches;
         this.innings = innings;
@@ -194,5 +195,13 @@ public class Player {
         }else{
             this.economy = 0;
         }
+    }
+
+    public double getBowlingAverage() {
+        return getRunsConceded()/getWickets();
+    }
+
+    public String getBestFigures(){
+        return getBestFiguresWickets() + "-" + getBestFiguresRuns();
     }
 }
